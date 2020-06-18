@@ -9,7 +9,7 @@ echo ""
 echo "*** Killing all running containers"
 echo ""
 docker kill $(docker ps -a -q)
-docker rm $(docker ps -a -q)
+# docker rm $(docker ps -a -q)
 
 #
 # Let's get rid of existing images...
