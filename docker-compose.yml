@@ -1,14 +1,23 @@
 version: "3.2"
-services: 
+services:
     auditor:
         build: ./docker/image-auditor
-        ports: 
+        ports:
             - "2205:2205"
             - "3030:3030"
-    musician:
+    musician1:
         build: ./docker/image-musician
+        image: res/musician
         command: "piano"
+    musician2:
+        build: ./docker/image-musician
+        image: res/musician
+        command: "violin"
+    musician3:
+        build: ./docker/image-musician
+        image: res/musician
+        command: "flute"
     monitor:
         build: ./docker/image-monitor
-        ports: 
+        ports:
             - "5000:5000"

@@ -88,9 +88,10 @@ setInterval(() => {
     });
 }, 1000);
 
+// On distribue le tableau des musicien via une API (bonus)
 app.get("/api", (req, res) => {
     res.set('Access-Control-Allow-Origin', '*');
-    res.json(musicians, );
+    res.json(musicians);
 });
 
 app.listen(3030, () => {
