@@ -1,7 +1,9 @@
 FROM node:14.4
 
-COPY src /opt/app/
+COPY . /opt/app/
 
 WORKDIR /opt/app/
 
-ENTRYPOINT ["node", "/opt/app/app.js"]
+RUN yarn install
+
+ENTRYPOINT ["node", "/opt/app/src/app.js"]

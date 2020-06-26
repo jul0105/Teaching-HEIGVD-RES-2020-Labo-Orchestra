@@ -1,3 +1,7 @@
+// =============
+// == Auditor ==
+// =============
+
 const net = require("net");
 const dgram = require("dgram");
 const client = dgram.createSocket("udp4");
@@ -5,9 +9,13 @@ const client = dgram.createSocket("udp4");
 const MULTICAST_GROUP = "239.255.123.12";
 const PORT = 3778;
 
+let musicians = [];
+
 const server = net.createServer((c) => {
     console.log("Client connected");
-    c.write(Buffer.from("Hello from auditor"));
+    setInterval(() => {
+        c.write(Buffer.from(JSON.stringify(musicians, null, 4)));
+    }, 5000);
     c.on("end", () => {
         console.log("Client disconnected");
     });
@@ -27,7 +35,39 @@ client.on("error", (err) => {
 });
 
 client.on("message", (msg, rinfo) => {
-    console.log("Receive from musician : " + msg.toString());
+    const json = JSON.parse(msg);
+    const id = json.musician_id;
+
+    const instrument = ((sound) => {
+        switch (sound) {
+            case "ti-ta-ti":
+                return "piano";
+            case "pouet":
+                return "trumpet";
+            case "trulu":
+                return "flute";
+            case "gzi-gzi":
+                return "violin";
+            case "boum-boum":
+                return "drum";
+        }
+    })(json.sound);
+
+    const obj = {
+        "uuid": id,
+        "instrument": instrument,
+        "activeSince": new Date()
+    };
+
+    const index = musicians.findIndex((m) => {
+        return m.uuid === id;
+    });
+    if (index === -1) {
+        musicians.push(obj);
+    } else {
+        musicians[index] = obj;
+    }
+    console.log(id + " plays " + instrument);
 });
 
 client.bind(PORT, () => {
