@@ -50,6 +50,7 @@ function askAuditorForActiveInstruments(activeInstrumentsHaveBeenRetrieved) {
 		var payload = "";
 		var PORT = 2205;
 		client.connect(PORT, auditorIPAddress, function() {
+			console.log("Auditor connected");
 		});
 		client.on('data', function(data) {
 			payload = payload + data;
@@ -138,6 +139,8 @@ async.parallel(startContainerFunctions, function(err, results) {
 	 * the 10 musicians.
 	 */
 	setTimeout(function() {
+
+		console.log("Starting tests...");
 		
 		/*
 		 * Check that the auditor has detected all running musicians, then schedule a new test, where we kill a
@@ -166,3 +169,7 @@ async.parallel(startContainerFunctions, function(err, results) {
 	}, 5000);
 });
 
+process.on("SIGINT", function () {
+	DockerUtils.killRandomMusicianContainer();
+    process.exit();
+});

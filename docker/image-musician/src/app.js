@@ -4,7 +4,7 @@
 
 const dgram = require("dgram");
 const client = dgram.createSocket("udp4");
-const { v4 } = require('uuid');
+const { v4 } = require("uuid");
 
 const MULTICAST_GROUP = "239.255.123.12";
 const PORT = 3778;
@@ -25,9 +25,24 @@ client.bind(PORT, () => {
 function playInstrument() {
     let message = {
         musician_id: id,
-        sound: "ti-ta-ti"
+        sound: getSound(process.argv[2]),
     };
     client.send(Buffer.from(JSON.stringify(message)), PORT, MULTICAST_GROUP);
+}
+
+function getSound(instrument) {
+    switch (instrument) {
+        case "piano":
+            return "ti-ta-ti";
+        case "trumpet":
+            return "pouet";
+        case "flute":
+            return "trulu";
+        case "violin":
+            return "gzi-gzi";
+        case "drum":
+            return "boum-boum";
+    }
 }
 
 process.on("SIGINT", function () {

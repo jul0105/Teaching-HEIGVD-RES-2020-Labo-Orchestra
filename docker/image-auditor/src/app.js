@@ -12,13 +12,8 @@ const PORT = 3778;
 let musicians = [];
 
 const server = net.createServer((c) => {
-    console.log("Client connected");
-    setInterval(() => {
-        c.write(Buffer.from(JSON.stringify(musicians, null, 4) + "\n"));
-    }, 5000);
-    c.on("end", () => {
-        console.log("Client disconnected");
-    });
+    c.write(Buffer.from(JSON.stringify(musicians, null, 4) + "\n"));
+    c.destroy();
 });
 
 server.on("listening", () => {
@@ -67,7 +62,7 @@ client.on("message", (msg, rinfo) => {
     } else {
         musicians[index] = obj;
     }
-    console.log(id + " plays " + instrument);
+    console.log(id + " plays " + instrument + " sounds " + json.sound);
 });
 
 client.bind(PORT, () => {
@@ -86,8 +81,7 @@ setInterval(() => {
     musicians = musicians.filter(m => {
         return (date - m.activeSince) / 1000 <= 5;
     })
-    console.log('Checking for active musician...')
-}, 5000)
+}, 1000)
 
 process.on("SIGINT", function () {
     process.exit();
