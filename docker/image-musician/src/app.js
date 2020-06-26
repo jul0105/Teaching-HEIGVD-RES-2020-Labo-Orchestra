@@ -13,16 +13,13 @@ const id = v4();
 
 console.log("My instrument is " + process.argv[2]);
 
-client.on("error", (err) => {
-    console.log(`client error:\n${err.stack}`);
-    client.close();
-});
-
+// On se lie au port 3778
 client.bind(PORT, () => {
+    // Envoie chaque seconde le son ainsi que l'id du musicien
     setInterval(playInstrument, 1000);
 });
 
-function playInstrument() {
+const playInstrument = () => {
     let message = {
         musician_id: id,
         sound: getSound(process.argv[2]),
@@ -30,7 +27,7 @@ function playInstrument() {
     client.send(Buffer.from(JSON.stringify(message)), PORT, MULTICAST_GROUP);
 }
 
-function getSound(instrument) {
+const getSound = (instrument) => {
     switch (instrument) {
         case "piano":
             return "ti-ta-ti";
@@ -45,6 +42,6 @@ function getSound(instrument) {
     }
 }
 
-process.on("SIGINT", function () {
+process.on("SIGINT", () => {
     process.exit();
 });
