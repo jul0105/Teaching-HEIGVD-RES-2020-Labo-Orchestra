@@ -120,21 +120,21 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 | #  | Topic |
 | ---  | --- |
 |Question | In a JavaScript program, if we have an object, how can we **serialize it in JSON**? |
-| | *Enter your response here...*  |
+| | With `JSON.stringify(myObject)`  |
 |Question | What is **npm**?  |
-| | *Enter your response here...*  |
+| | Node Package Manager, this is used to managed project dependencies when we need to work with other Node modules  |
 |Question | What is the `npm install` command and what is the purpose of the `--save` flag?  |
-| | *Enter your response here...*  |
+| | It is used to install a new dependency to the project and add it to the package.json file. The flag `--save` indicates that the dependency is needed for production environement. We can use `--save-dev` or `-D` to tell npm the dependency is for development only.  |
 |Question | How can we use the `https://www.npmjs.com/` web site?  |
-| | *Enter your response here...*  |
+| | We can search for a Node module we need like for generating a unique ID.  |
 |Question | In JavaScript, how can we **generate a UUID** compliant with RFC4122? |
-| | *Enter your response here...*  |
+| | We can use the `uuid` package. It provides a `v4` function we can call to generate a new unique ID. |
 |Question | In Node.js, how can we execute a function on a **periodic** basis? |
-| | *Enter your response here...*  |
+| | We use the function `setInterval(callback, delay_in_ms[, ...args])`. This global function will call the specified callback with given args every x millisecond(s). |
 |Question | In Node.js, how can we **emit UDP datagrams**? |
-| | *Enter your response here...*  |
+| | We first need to create a datagram socket. After that we can use the `send` method on the socket to send a buffer to specific address with port number.  |
 |Question | In Node.js, how can we **access the command line arguments**? |
-| | *Enter your response here...*  |
+| | We use the `process.argv` array. In our case. the first one (`process.argv[0]`) is `node`, the second one (`process.argv[1]`) is the script file and the third (`process.argv[2]`) will be the instrument. |
 
 
 ## Task 3: package the "musician" app in a Docker image

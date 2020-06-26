@@ -13,20 +13,6 @@ const id = v4();
 
 console.log("My instrument is " + process.argv[2]);
 
-// On se lie au port 3778
-client.bind(PORT, () => {
-    // Envoie chaque seconde le son ainsi que l'id du musicien
-    setInterval(playInstrument, 1000);
-});
-
-const playInstrument = () => {
-    let message = {
-        musician_id: id,
-        sound: getSound(process.argv[2]),
-    };
-    client.send(Buffer.from(JSON.stringify(message)), PORT, MULTICAST_GROUP);
-}
-
 const getSound = (instrument) => {
     switch (instrument) {
         case "piano":
@@ -42,6 +28,18 @@ const getSound = (instrument) => {
     }
 }
 
+const playInstrument = () => {
+    let message = {
+        musician_id: id,
+        sound: getSound(process.argv[2]),
+    };
+    client.send(Buffer.from(JSON.stringify(message)), PORT, MULTICAST_GROUP);
+}
+
+// Envoie chaque seconde le son ainsi que l'id du musicien
+setInterval(playInstrument, 1000);
+
+// Facilite la fermeture de l'app via Docker
 process.on("SIGINT", () => {
     process.exit();
 });

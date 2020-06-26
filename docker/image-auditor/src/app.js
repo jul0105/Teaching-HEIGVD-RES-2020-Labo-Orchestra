@@ -98,6 +98,7 @@ app.listen(3030, () => {
     console.log("API server listening on port 3030");
 });
 
+// Facilite la fermeture de l'app via Docker
 process.on("SIGINT", () => {
     process.exit();
 });
