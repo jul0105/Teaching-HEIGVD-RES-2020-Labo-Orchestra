@@ -80,7 +80,7 @@ const getInstrument = (sound) => {
     }
 };
 
-// Actualise le talbeau des musiciens actifs
+// Actualise le tableau des musiciens actifs
 setInterval(() => {
     date = new Date();
     musicians = musicians.filter((m) => {
@@ -98,6 +98,10 @@ app.listen(3030, () => {
     console.log("API server listening on port 3030");
 });
 
-process.on("SIGINT", function () {
+process.on("SIGINT", () => {
+    process.exit();
+});
+
+process.on("SIGTERM", () => {
     process.exit();
 });
