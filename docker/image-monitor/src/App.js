@@ -30,8 +30,8 @@ function App() {
             <div className="row">
                 {musicians.map((m, index) => {
                     return (
-                        <div key={index} className="col-sm-3">
-                            <div className="card">
+                        <div key={index} className="col-lg-3 col-md-4 col-sm-6">
+                            <div className="card mb-3">
                                 <h5 className="card-header">
                                     Musicien N°{index + 1}
                                 </h5>
