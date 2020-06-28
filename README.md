@@ -142,17 +142,17 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 | #  | Topic |
 | ---  | --- |
 |Question | How do we **define and build our own Docker image**?|
-| | *Enter your response here...*  |
+| | With a **Dockerfile** extending the `node` image. First, we copy the content of the current directory then we install dependencies. And finally, we start the node app.<br />The image can be built with : `docker build -t res/musician .` |
 |Question | How can we use the `ENTRYPOINT` statement in our Dockerfile?  |
-| | *Enter your response here...*  |
+| | We use `ENTRYPOINT` to specify the command to execute at the start of the container. In our case, start our node application `app.js`. |
 |Question | After building our Docker image, how do we use it to **run containers**?  |
-| | *Enter your response here...*  |
+| | We can start a musician with `docker run res/musician <instrument>`<br />Instrument can be piano, trumpet, flute, violin or drum. |
 |Question | How do we get the list of all **running containers**?  |
-| | *Enter your response here...*  |
+| | We can list the running containers with : `docker ps` |
 |Question | How do we **stop/kill** one running container?  |
-| | *Enter your response here...*  |
+| | To gently stop a container, use : `docker stop <container id or name>`. This will send a SIGTERM then a SIGKILL after a grace period (generally 10 seconds)<br />To brutally stop a container, use : `docker kill <container id or name>`. This will immediately send a SIGKILL. |
 |Question | How can we check that our running containers are effectively sending UDP datagrams?  |
-| | *Enter your response here...*  |
+| | We can use wireshark to monitor the traffic of our containers or we can use our *monitor* image which is a simple web app that allow us to visualize active musician (see Task 5). |
 
 
 ## Task 4: implement an "auditor" Node.js application
@@ -176,8 +176,7 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 | #  | Topic |
 | ---  | --- |
 |Question | How do we validate that the whole system works, once we have built our Docker image? |
-| | *Enter your response here...* |
-
+| | We made another image named *"monitor"* that allow us to monitor all active musicians in a simple React JS web application. The script `deploy.sh` start the auditor, the monitor and 10 musicians so we can validate that everything is working as intended at [localhost:5000](http://localhost:5000).<br />![](images/validate.png) |
 
 ## Constraints
 
