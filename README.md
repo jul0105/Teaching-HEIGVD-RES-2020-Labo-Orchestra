@@ -160,15 +160,15 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 | #  | Topic |
 | ---  | ---  |
 |Question | With Node.js, how can we listen for UDP datagrams in a multicast group? |
-| | *Enter your response here...*  |
+| | After we bound the datagram socket to the chosen port, we need to subscribe to the multicast group. We use the `addMembership` function with the multicast group address as parameter.  |
 |Question | How can we use the `Map` built-in object introduced in ECMAScript 6 to implement a **dictionary**?  |
-| | *Enter your response here...* |
+| | We used a simple array instead of a Map. We used `indexOf` to find an existing musician. |
 |Question | How can we use the `Moment.js` npm module to help us with **date manipulations** and formatting?  |
-| | *Enter your response here...* |
+| | We used vanilla JavaScript dates :) We can use `toLocaleString` to format dates. |
 |Question | When and how do we **get rid of inactive players**?  |
-| | *Enter your response here...* |
+| | We check every second in the auditor for inactive musicians. We used the `filter` function on the array to get back only active musicians. |
 |Question | How do I implement a **simple TCP server** in Node.js?  |
-| | *Enter your response here...* |
+| | Just call the `createServer` function from the `net` module. After that we can call `listen` on the server instance with a given port to bind it. |
 
 
 ## Task 5: package the "auditor" app in a Docker image
