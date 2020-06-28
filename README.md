@@ -176,7 +176,7 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 | #  | Topic |
 | ---  | --- |
 |Question | How do we validate that the whole system works, once we have built our Docker image? |
-| | We made another image named *"monitor"* that allow us to monitor all active musicians in a simple React JS web application. The script `deploy.sh` start the auditor, the monitor and 10 musicians so we can validate that everything is working as intended at [localhost:5000](http://localhost:5000).<br />![](images/validate.png) |
+| | We made another image named *"monitor"* that allow us to monitor all active musicians in a simple React JS web application. The script `deploy.sh` start the auditor, the monitor and 10 musicians so we can validate that everything is working as intended at [localhost:5000](http://localhost:5000). The auditor expose the musicians array through an API (localhost:3030). The monitor just request the API each second to refresh its UI. <br />![](images/validate.png) |
 
 ## Constraints
 
